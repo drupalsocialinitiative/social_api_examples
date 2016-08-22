@@ -1,0 +1,13 @@
+social_post_twitter.settings:
+  title: 'Twitter'
+  route_name: social_post_twitter.settings_form
+  base_route: social_post.integrations
+social_post.twitter.settings.tab:
+  title: 'Settings'
+  route_name: social_post_twitter.settings_form
+  parent_id: social_post_twitter.settings
+# Twitter user entity routing definition
+entity.social_post_twitter_user.collection:
+  title: 'Users'
+  route_name: entity.social_post_twitter_user.collection
+  parent_id: social_post_twitter.settings

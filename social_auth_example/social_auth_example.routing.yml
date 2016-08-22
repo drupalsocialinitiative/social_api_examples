@@ -1,0 +1,25 @@
+social_auth_example.settings_form:
+  path: '/admin/config/social-api/social-auth/google'
+  defaults:
+    _title: 'Google Account Settings'
+    _form: 'Drupal\social_auth_example\Form\GoogleAuthSettingsForm'
+  requirements:
+    _permission: 'administer social api authentication'
+
+social_auth_example.redirect_to_google:
+  path: 'user/login/google'
+  defaults:
+    _controller: 'Drupal\social_auth_example\Controller\GoogleAuthController::redirectToGoogle'
+  requirements:
+    _role: 'anonymous'
+  options:
+    no_cache: TRUE
+
+social_auth_example.callback:
+  path: '/user/login/google/callback'
+  defaults:
+    _controller: 'Drupal\social_auth_example\Controller\GoogleAuthController::callback'
+  requirements:
+    _role: 'anonymous'
+  options:
+    no_cache: TRUE

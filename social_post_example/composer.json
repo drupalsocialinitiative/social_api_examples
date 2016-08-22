@@ -1,0 +1,16 @@
+{
+    "name": "drupal/social_post_twitter",
+    "type": "drupal-module",
+    "description": "Social Post integration for Twitter",
+    "keywords": ["Drupal"],
+    "license": "GPL-2.0+",
+    "homepage": "https://www.drupal.org/project/social_post_twitter",
+    "minimum-stability": "dev",
+    "support": {
+        "issues": "https://www.drupal.org/project/issues/social_post_twitter",
+        "source": "http://cgit.drupalcode.org/social_post_twitter"
+    },
+    "require": {
+        "abraham/twitteroauth": "0.6.*"
+    }
+}

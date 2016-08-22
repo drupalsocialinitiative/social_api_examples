@@ -1,0 +1,8 @@
+name: Social Post Twitter
+type: module
+description: Social Post integration for Twitter
+core: 8.x
+package: Social
+dependencies:
+  - social_post
+  - rules
