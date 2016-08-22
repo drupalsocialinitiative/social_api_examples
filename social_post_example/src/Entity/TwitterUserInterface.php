@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\social_post_twitter\Entity;
+namespace Drupal\social_post_example\Entity;
 
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Entity\EntityChangedInterface;
@@ -9,7 +9,10 @@ use Drupal\user\EntityOwnerInterface;
 /**
  * Provides an interface for defining Twitter user entities.
  *
- * @ingroup social_post_twitter
+ * @ingroup social_post_example
+ *
+ * This is more related to the Entity API.
+ * @see https://goo.gl/3DICwY
  */
 interface TwitterUserInterface extends ContentEntityInterface, EntityChangedInterface, EntityOwnerInterface {
 
@@ -27,7 +30,7 @@ interface TwitterUserInterface extends ContentEntityInterface, EntityChangedInte
    * @param string $name
    *   The Twitter user entity name.
    *
-   * @return \Drupal\social_post_twitter\Entity\TwitterUserInterface
+   * @return \Drupal\social_post_example\Entity\TwitterUserInterface
    *   The called Twitter user entity entity.
    */
   public function setName($name);
@@ -46,7 +49,7 @@ interface TwitterUserInterface extends ContentEntityInterface, EntityChangedInte
    * @param int $timestamp
    *   The Twitter user entity creation timestamp.
    *
-   * @return \Drupal\social_post_twitter\Entity\TwitterUserInterface
+   * @return \Drupal\social_post_example\Entity\TwitterUserInterface
    *   The called Twitter user entity entity.
    */
   public function setCreatedTime($timestamp);
@@ -68,7 +71,7 @@ interface TwitterUserInterface extends ContentEntityInterface, EntityChangedInte
    *   TRUE to set this Twitter user entity to published, FALSE to set it to
    *   unpublished.
    *
-   * @return \Drupal\social_post_twitter\Entity\TwitterUserInterface
+   * @return \Drupal\social_post_example\Entity\TwitterUserInterface
    *   The called Twitter user entity entity.
    */
   public function setPublished($published);

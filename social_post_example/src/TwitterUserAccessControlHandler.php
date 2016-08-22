@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\social_post_twitter;
+namespace Drupal\social_post_example;
 
 use Drupal\Core\Entity\EntityAccessControlHandler;
 use Drupal\Core\Entity\EntityInterface;
@@ -10,7 +10,10 @@ use Drupal\Core\Access\AccessResult;
 /**
  * Access controller for the Twitter user entity.
  *
- * @see \Drupal\social_post_twitter\Entity\TwitterUser.
+ * @see \Drupal\social_post_example\Entity\TwitterUser.
+ *
+ * This is more related to the Entity API.
+ * @see https://goo.gl/3DICwY
  */
 class TwitterUserAccessControlHandler extends EntityAccessControlHandler {
 

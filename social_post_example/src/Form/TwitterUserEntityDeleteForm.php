@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\social_post_twitter\Form;
+namespace Drupal\social_post_example\Form;
 
 use Drupal\Core\Entity\ContentEntityDeleteForm;
 use Drupal\Core\Entity\EntityManagerInterface;
@@ -12,7 +12,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * Provides a form for deleting Twitter user entities.
  *
- * @ingroup social_post_twitter
+ * @ingroup social_post_example
  */
 class TwitterUserEntityDeleteForm extends ContentEntityDeleteForm {
 
@@ -72,7 +72,7 @@ class TwitterUserEntityDeleteForm extends ContentEntityDeleteForm {
       return Url::fromRoute('entity.user.edit_form', array('user' => $uid));
     }
 
-    return Url::fromRoute('entity.social_post_twitter_user.collection');
+    return Url::fromRoute('entity.social_post_example_user.collection');
   }
 
 }

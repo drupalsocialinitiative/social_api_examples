@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\social_post_twitter\Entity;
+namespace Drupal\social_post_example\Entity;
 
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
@@ -12,30 +12,33 @@ use Drupal\user\UserInterface;
 /**
  * Defines the Twitter user entity entity.
  *
- * @ingroup social_post_twitter
+ * @ingroup social_post_example
+ *
+ * This is more related to the Entity API.
+ * @see https://goo.gl/3DICwY
  *
  * @ContentEntityType(
- *   id = "social_post_twitter_user",
+ *   id = "social_post_example_user",
  *   label = @Translation("Social Post Twitter User"),
  *   handlers = {
  *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
- *     "list_builder" = "Drupal\social_post_twitter\Entity\Controller\TwitterUserListBuilder",
+ *     "list_builder" = "Drupal\social_post_example\Entity\Controller\TwitterUserListBuilder",
  *
  *     "form" = {
- *       "delete" = "Drupal\social_post_twitter\Form\TwitterUserEntityDeleteForm"
+ *       "delete" = "Drupal\social_post_example\Form\TwitterUserEntityDeleteForm"
  *     },
- *     "access" = "Drupal\social_post_twitter\TwitterUserAccessControlHandler",
+ *     "access" = "Drupal\social_post_example\TwitterUserAccessControlHandler",
  *   },
  *   list_cache_contexts = { "user" },
- *   base_table = "twitter_user",
- *   admin_permission = "administer social post twitter user entity",
+ *   base_table = "social_post_example_user",
+ *   admin_permission = "administer social post example user entity",
  *   entity_keys = {
  *     "id" = "id",
  *     "uuid" = "uuid"
  *   },
  *   links = {
- *     "delete-form" = "/admin/config/social-api/social-post/twitter/users/{social_post_twitter_user}/delete",
- *     "collection" = "/admin/config/social-api/social-post/twitter/users"
+ *     "delete-form" = "/admin/config/social-api/social-post/example/users/{social_post_example_user}/delete",
+ *     "collection" = "/admin/config/social-api/social-post/example/users"
  *   }
  * )
  */

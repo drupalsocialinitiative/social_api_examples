@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\social_post_twitter\Settings;
+namespace Drupal\social_post_example\Settings;
 
 /**
  * Defines an interface for Social Post Twitter settings.

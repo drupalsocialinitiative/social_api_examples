@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\social_post_twitter\Form;
+namespace Drupal\social_post_example\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -14,21 +14,21 @@ class TwitterPostSettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   protected function getEditableConfigNames() {
-    return ['social_post_twitter.settings'];
+    return ['social_post_example.settings'];
   }
 
   /**
    * {@inheritdoc}
    */
   public function getFormId() {
-    return 'social_post_twitter.form';
+    return 'social_post_example.form';
   }
 
   /**
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $config = $this->config('social_post_twitter.settings');
+    $config = $this->config('social_post_example.settings');
 
     $form['twitter_settings'] = array(
       '#type' => 'details',
@@ -61,7 +61,7 @@ class TwitterPostSettingsForm extends ConfigFormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $values = $form_state->getValues();
 
-    $this->config('social_post_twitter.settings')
+    $this->config('social_post_example.settings')
       ->set('consumer_key', $values['consumer_key'])
       ->set('consumer_secret', $values['consumer_secret'])
       ->save();

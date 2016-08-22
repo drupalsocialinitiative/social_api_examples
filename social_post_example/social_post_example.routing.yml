@@ -1,0 +1,38 @@
+social_post_example.settings_form:
+  path: '/admin/config/social-api/social-post/twitter'
+  defaults:
+    _title: 'Twitter Settings'
+    _form: 'Drupal\social_post_example\Form\TwitterPostSettingsForm'
+  requirements:
+    _permission: 'administer social api autoposting'
+
+# Routes for authentication
+social_post_example.redirect_to_twitter:
+  path: '/user/social-post/example/auth'
+  defaults:
+    _controller: 'Drupal\social_post_example\Controller\TwitterPostController::redirectToTwitter'
+  requirements:
+    _permission: 'perform twitter autoposting tasks'
+social_post_example.callback:
+  path: '/user/social-post/example/auth/callback'
+  defaults:
+    _controller: 'Drupal\social_post_example\Controller\TwitterPostController::callback'
+  requirements:
+    _permission: 'perform twitter autoposting tasks'
+
+# Twitter User Entity routes
+entity.social_post_example_user.collection:
+  path: '/admin/config/social-api/social-post/example/users'
+  defaults:
+    _entity_list: 'social_post_example_user'
+    _title: 'Twitter User List'
+  requirements:
+    _permission: 'view social post user entities'
+entity.social_post_example_user.delete_form:
+  path: '/admin/config/social-api/social-post/example/users/{social_post_example_user}/delete/{user}'
+  defaults:
+    _entity_form: 'social_post_example_user.delete'
+    _title: 'Delete user'
+    user: false # A drupal user id will be passed instead if the form is invoked from a user edit form
+  requirements:
+    _entity_access: 'social_post_example_user.delete'

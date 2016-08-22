@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\social_post_twitter\Entity\Controller;
+namespace Drupal\social_post_example\Entity\Controller;
 
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityListBuilder;
@@ -12,7 +12,10 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * Defines a class to build a listing of Twitter user entities.
  *
- * @ingroup social_post_twitter
+ * @ingroup social_post_example
+ *
+ * This is more related to the Entity API.
+ * @see https://goo.gl/3DICwY
  */
 class TwitterUserListBuilder extends EntityListBuilder {
 
@@ -78,7 +81,7 @@ class TwitterUserListBuilder extends EntityListBuilder {
    * {@inheritdoc}
    */
   public function buildRow(EntityInterface $entity) {
-    /* @var $entity \Drupal\social_post_twitter\Entity\TwitterUser */
+    /* @var $entity \Drupal\social_post_example\Entity\TwitterUser */
     $row['twitter_id'] = $entity->getTwitterId();
     $row['screen_name'] = $entity->getScreenName();
 

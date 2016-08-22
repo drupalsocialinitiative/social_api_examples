@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\social_post_twitter;
+namespace Drupal\social_post_example;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Entity\Query\QueryFactory;

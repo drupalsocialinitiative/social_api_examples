@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\social_post_twitter;
+namespace Drupal\social_post_example;
 
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -71,7 +71,7 @@ class TwitterPostAuthManager {
    *   The oauth token secret.
    */
   public function setOauthTokenSecret($oauth_token_secret) {
-    $this->session->set('social_post_twitter_oauth_token_secret', $oauth_token_secret);
+    $this->session->set('social_post_example_oauth_token_secret', $oauth_token_secret);
   }
 
   /**
@@ -85,7 +85,7 @@ class TwitterPostAuthManager {
    *   The oauth token.
    */
   public function getOauthToken() {
-    return $this->session->get('social_post_twitter_oauth_token');
+    return $this->session->get('social_post_example_oauth_token');
   }
 
   /**
@@ -99,7 +99,7 @@ class TwitterPostAuthManager {
    *   The oauth token secret.
    */
   public function getOauthTokenSecret() {
-    return $this->session->get('social_post_twitter_oauth_token_secret');
+    return $this->session->get('social_post_example_oauth_token_secret');
   }
 
 }

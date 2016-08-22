@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\social_post_twitter\Settings;
+namespace Drupal\social_post_example\Settings;
 
 use Drupal\social_api\Settings\SettingsBase;
 

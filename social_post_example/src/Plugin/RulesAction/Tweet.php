@@ -1,21 +1,21 @@
 <?php
 
-namespace Drupal\social_post_twitter\Plugin\RulesAction;
+namespace Drupal\social_post_example\Plugin\RulesAction;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\rules\Core\RulesActionBase;
-use Drupal\social_post_twitter\Plugin\Network\TwitterPost;
-use Drupal\social_post_twitter\Plugin\Network\TwitterPostInterface;
-use Drupal\social_post_twitter\TwitterPostTokenManager;
+use Drupal\social_post_example\Plugin\Network\TwitterPost;
+use Drupal\social_post_example\Plugin\Network\TwitterPostInterface;
+use Drupal\social_post_example\TwitterPostTokenManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Provides a 'Tweet' action.
  *
  * @RulesAction(
- *   id = "social_post_twitter_tweet",
+ *   id = "social_post_example_tweet",
  *   label = @Translation("Tweet"),
  *   category = @Translation("Social Post"),
  *   context = {
@@ -31,7 +31,7 @@ class Tweet extends RulesActionBase implements ContainerFactoryPluginInterface {
   /**
    * The twitter post network plugin.
    *
-   * @var \Drupal\social_post_twitter\Plugin\Network\TwitterPostInterface
+   * @var \Drupal\social_post_example\Plugin\Network\TwitterPostInterface
    */
   protected $twitterPost;
 
@@ -52,7 +52,7 @@ class Tweet extends RulesActionBase implements ContainerFactoryPluginInterface {
   /**
    * The Twitter post token manager.
    *
-   * @var \Drupal\social_post_twitter\TwitterPostTokenManager
+   * @var \Drupal\social_post_example\TwitterPostTokenManager
    */
   protected $tokenManager;
 
@@ -83,13 +83,13 @@ class Tweet extends RulesActionBase implements ContainerFactoryPluginInterface {
    *   The plugin ID for the plugin instance.
    * @param mixed $plugin_definition
    *   The plugin implementation definition.
-   * @param \Drupal\social_post_twitter\Plugin\Network\TwitterPostInterface $twitter_post
+   * @param \Drupal\social_post_example\Plugin\Network\TwitterPostInterface $twitter_post
    *   The twitter post network plugin.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_manager
    *   The entity type manager.
    * @param \Drupal\Core\Session\AccountInterface $current_user
    *   The current user.
-   * @param \Drupal\social_post_twitter\TwitterPostTokenManager $token_manager
+   * @param \Drupal\social_post_example\TwitterPostTokenManager $token_manager
    *   The Twitter post token manager.
    */
   public function __construct(array $configuration,
@@ -118,7 +118,7 @@ class Tweet extends RulesActionBase implements ContainerFactoryPluginInterface {
     $status = $this->tokenManager->formatStatus($status);
 
     $accounts = $this->getTwitterAccountsByUserId($this->currentUser->id());
-    /* @var \Drupal\social_post_twitter\Entity\TwitterUserInterface $account */
+    /* @var \Drupal\social_post_example\Entity\TwitterUserInterface $account */
     foreach ($accounts as $account) {
       $this->twitterPost->doPost($account->getAccessToken(), $account->getAccessTokenSecret(), $status);
     }

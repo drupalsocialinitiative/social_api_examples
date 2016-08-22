@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\social_post_twitter\Plugin\Network;
+namespace Drupal\social_post_example\Plugin\Network;
 
 use Abraham\TwitterOAuth\TwitterOAuth;
 use Drupal\Core\Config\ConfigFactoryInterface;
@@ -13,14 +13,38 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * Defines Social Post Twitter Network Plugin.
  *
+ * This is the main definition of the Network Plugin. The most important
+ * properties are listed below.
+ *
+ * id: The unique identifier of this Network Plugin. It must have the same name
+ * as the module itself.
+ *
+ * social_network: The Social Network for which this Network Plugin is defined.
+ *
+ * type: The type of the Network Plugin:
+ * - social_auth: A Network Plugin for user login/registration.
+ * - social_post: A Network Plugin for autoposting tasks.
+ * - social_widgets: A Network Plugin for social networks' widgets.
+ *
+ * handlers: Defined the settings manager and the configuration identifier
+ * in the configuration manager. In detail:
+ *
+ * - settings: The settings management for this Network Plugin.
+ *   - class: The class for getting the configuration data. The settings
+ *     property of this class is the instance of the class declared in this
+ *     field.
+ *   - config_id: The configuration id. It usually is the same used by the
+ *     configuration form.
+ *     @see Drupal\social_post_example\Form\TwitterPostSettingsForm.
+ *
  * @Network(
- *   id = "social_post_twitter",
+ *   id = "social_post_example",
  *   social_network = "Twitter",
  *   type = "social_post",
  *   handlers = {
  *     "settings": {
- *        "class": "\Drupal\social_post_twitter\Settings\TwitterPostSettings",
- *        "config_id": "social_post_twitter.settings"
+ *        "class": "\Drupal\social_post_example\Settings\TwitterPostSettings",
+ *        "config_id": "social_post_example.settings"
  *      }
  *   }
  * )
@@ -92,6 +116,12 @@ class TwitterPost extends SocialPostNetwork implements TwitterPostInterface {
 
   /**
    * {@inheritdoc}
+   *
+   * Initializes the Google SDK to request Google Accounts.
+   *
+   * The returning value of this method is what is returned when an instance of
+   * this Network Plugin called the getSdk method.
+   * @see Drupal\social_post_example\Controller\TwitterPostController::redirectToTwitter.
    */
   protected function initSdk() {
     $class_name = '\Abraham\TwitterOAuth\TwitterOAuth';
@@ -99,7 +129,7 @@ class TwitterPost extends SocialPostNetwork implements TwitterPostInterface {
       throw new SocialApiException(sprintf('The PHP SDK for Twitter could not be found. Class: %s.', $class_name));
     }
 
-    /* @var \Drupal\social_post_twitter\Settings\TwitterPostSettings $settings */
+    /* @var \Drupal\social_post_example\Settings\TwitterPostSettings $settings */
     $settings = $this->settings;
 
     return new TwitterOAuth($settings->getConsumerKey(), $settings->getConsumerSecret());
@@ -107,6 +137,8 @@ class TwitterPost extends SocialPostNetwork implements TwitterPostInterface {
 
   /**
    * {@inheritdoc}
+   *
+   * Perform the posting tasks to the social network.
    */
   public function post() {
     if (!$this->connection) {
@@ -120,6 +152,14 @@ class TwitterPost extends SocialPostNetwork implements TwitterPostInterface {
 
   /**
    * {@inheritdoc}
+   *
+   * Wrapper to post() method.
+   *
+   * This method sets the property that will be used by post(), so it can
+   * be defined with the requirement of your specific socila network.
+   *
+   * For Twitter, we need to pass an access token and an access secret to
+   * connect to the API, and we need a status message that will be tweeted.
    */
   public function doPost($access_token, $access_token_secret, $status) {
     $this->connection = $this->getSdk2($access_token, $access_token_secret);
@@ -138,7 +178,7 @@ class TwitterPost extends SocialPostNetwork implements TwitterPostInterface {
    * {@inheritdoc}
    */
   public function getSdk2($oauth_token, $oauth_token_secret) {
-    /* @var \Drupal\social_post_twitter\Settings\TwitterPostSettings $settings */
+    /* @var \Drupal\social_post_example\Settings\TwitterPostSettings $settings */
     $settings = $this->settings;
 
     return new TwitterOAuth($settings->getConsumerKey(), $settings->getConsumerSecret(),

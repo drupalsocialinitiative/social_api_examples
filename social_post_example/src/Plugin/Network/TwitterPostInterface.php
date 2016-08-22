@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\social_post_twitter\Plugin\Network;
+namespace Drupal\social_post_example\Plugin\Network;
 
 use Drupal\social_post\Plugin\Network\SocialPostNetworkInterface;
 
