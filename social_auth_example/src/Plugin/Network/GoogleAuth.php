@@ -37,7 +37,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *     @see Drupal\social_auth_example\Form\GoogleAuthSettingsForm.
  *
  * @Network(
- *   id = "social_auth_google",
+ *   id = "social_auth_example",
  *   social_network = "Google",
  *   type = "social_auth",
  *   handlers = {
@@ -95,7 +95,7 @@ class GoogleAuth extends SocialAuthNetwork {
   /**
    * {@inheritdoc}
    *
-   * Initialize the Google SDK to request Google Accounts.
+   * Initializes the Google SDK to request Google Accounts.
    *
    * The returning value of this method is what is returned when an instance of
    * this Network Plugin called the getSdk method.

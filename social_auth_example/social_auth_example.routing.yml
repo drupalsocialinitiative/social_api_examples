@@ -7,7 +7,7 @@ social_auth_example.settings_form:
     _permission: 'administer social api authentication'
 
 social_auth_example.redirect_to_google:
-  path: 'user/login/google'
+  path: 'user/login/example'
   defaults:
     _controller: 'Drupal\social_auth_example\Controller\GoogleAuthController::redirectToGoogle'
   requirements:
@@ -16,7 +16,7 @@ social_auth_example.redirect_to_google:
     no_cache: TRUE
 
 social_auth_example.callback:
-  path: '/user/login/google/callback'
+  path: '/user/login/example/callback'
   defaults:
     _controller: 'Drupal\social_auth_example\Controller\GoogleAuthController::callback'
   requirements:

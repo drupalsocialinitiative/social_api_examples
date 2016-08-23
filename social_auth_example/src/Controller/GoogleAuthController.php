@@ -93,7 +93,7 @@ class GoogleAuthController extends ControllerBase {
   public function redirectToGoogle() {
     /* @var \Google_Client $client */
     // Creates an instance of the Network Plugin and gets the SDK.
-    $client = $this->networkManager->createInstance('social_auth_google')->getSdk();
+    $client = $this->networkManager->createInstance('social_auth_example')->getSdk();
     // Sets the scopes (permissions to ask for).
     $client->setScopes(array('email', 'profile'));
 
@@ -112,8 +112,7 @@ class GoogleAuthController extends ControllerBase {
    * @see social_auth_example.routing.yml.
    *
    * This method is triggered when the path user/login/google/callback is
-   * loaded. It creates an instance of the Network Plugin 'social auth google'
-   * and returns an instance of the \Google_Client object.
+   * loaded. It creates an instance of the Network Plugin 'social auth example'.
    *
    * It later authenticates the user and creates the service to obtain data
    * about the user.
@@ -126,7 +125,7 @@ class GoogleAuthController extends ControllerBase {
   public function callback() {
     /* @var \Google_Client $client */
     // Creates the Network Plugin instance and get the SDK.
-    $client = $this->networkManager->createInstance('social_auth_google')->getSdk();
+    $client = $this->networkManager->createInstance('social_auth_example')->getSdk();
 
     // Authenticate the user and obtains his data.
     $this->googleManager->setClient($client)
