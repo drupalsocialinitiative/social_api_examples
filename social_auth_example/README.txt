@@ -1,4 +1,4 @@
-SOCIAL AUTH GOOGLE MODULE
+SOCIAL AUTH EXAMPLE MODULE
 
 CONTENTS OF THIS FILE
 ---------------------
@@ -14,8 +14,9 @@ CONTENTS OF THIS FILE
 INTRODUCTION
 ------------
 
-Social Auth Google Module is a Google Authentication integration for Drupal. It
-is based on the Social Auth and Social API projects
+Social Auth Example Module is a Google Authentication integration for Drupal. It
+is based on the Social Auth and Social API projects. This module serves as a
+guide to create new implementers for Social Auth Google.
 
 It adds to the site:
 * A new url: /user/login/google.

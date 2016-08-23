@@ -1,5 +1,5 @@
 social_auth_example.settings_form:
-  path: '/admin/config/social-api/social-auth/google'
+  path: '/admin/config/social-api/social-auth/example'
   defaults:
     _title: 'Google Account Settings'
     _form: 'Drupal\social_auth_example\Form\GoogleAuthSettingsForm'
