@@ -7,7 +7,7 @@ social_post.twitter.settings.tab:
   route_name: social_post_example.settings_form
   parent_id: social_post_example.settings
 # Twitter user entity routing definition
-entity.social_post_twitter_user.collection:
+entity.social_post_example_user.collection:
   title: 'Users'
   route_name: entity.social_post_example_user.collection
   parent_id: social_post_example.settings

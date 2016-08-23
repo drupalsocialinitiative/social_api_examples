@@ -11,9 +11,12 @@ use Drupal\Core\Session\AccountInterface;
 
 /**
  * Implements hook_form_FORM_ID_alter().
+ *
+ * If the user has permission to associate a Twitter account, he will see a
+ * table with his accounts and can add more accounts.
  */
 function social_post_twitter_form_user_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-
+  // Gets the current user info.
   $current_user = \Drupal::currentUser();
 
   if (_social_post_twitter_can_grant_permission($current_user)) {
@@ -23,7 +26,7 @@ function social_post_twitter_form_user_form_alter(&$form, FormStateInterface $fo
 }
 
 /**
- * Check if the user is allowed to grant permission for autoposting.
+ * Checks if the user is allowed to grant permission for autoposting.
  *
  * @param \Drupal\Core\Session\AccountInterface $current_user
  *   The current user.
@@ -67,7 +70,7 @@ function _social_post_twitter_user_edit_form(AccountInterface $current_user) {
     '#empty' => t('You have not added any account yet'),
   );
 
-  /* @var \Drupal\social_post_twitter\Entity\TwitterUser $account */
+  /* @var \Drupal\social_post_example\Entity\TwitterUser $account */
   foreach ($accounts as $id => $account) {
     $form['social_post_twitter']['accounts'][$id]['screen_name'] = array(
       '#type' => 'link',
