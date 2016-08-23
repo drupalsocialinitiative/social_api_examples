@@ -1,4 +1,4 @@
-social_auth_google.settings.tab:
-  title: 'Google'
+social_auth_example.settings.tab:
+  title: 'Example'
   route_name: social_auth_example.settings_form
   base_route: social_auth.integrations
