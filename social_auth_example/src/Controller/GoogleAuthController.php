@@ -61,7 +61,7 @@ class GoogleAuthController extends ControllerBase {
   public static function create(ContainerInterface $container) {
     return new static(
       $container->get('plugin.network.manager'),
-      $container->get('google_auth.manager'),
+      $container->get('example_auth.manager'),
       $container->get('social_auth.user_manager')
     );
   }
