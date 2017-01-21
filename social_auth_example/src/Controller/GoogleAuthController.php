@@ -156,6 +156,9 @@ class GoogleAuthController extends ControllerBase {
 			$drupal_user = $this->userManager->createUser($user->getName(), $user->getEmail(), 'social_auth_example');
 			// If the new user could be registered.
 			if ($drupal_user) {
+        // Download and set profile picture for the newly created user.
+        $this->userManager->setProfilePic($drupal_user, $user->getPicture(), $user->getId(), 'social_auth_example');
+
 				// If the new user could be logged in.
 				// Second argument is optional and allows other modules to implement
 				// alternative behaviors when user logs in using social_auth_example.
