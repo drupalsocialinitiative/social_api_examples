@@ -137,35 +137,8 @@ class GoogleAuthController extends ControllerBase {
 
 		// If user information could be retrieved.
 		if ($user) {
-			// Tries to load the user by his email.
-			$drupal_user = $this->userManager->loadUserByProperty('mail', $user->getEmail());
-			// If user email has already an account in the site.
-			if ($drupal_user) {
-				// If usser was successfully log in.
-				// Second argument is optional and allows other modules to implement
-				// alternative behaviors when user logs in using social_auth_example.
-				if ($this->userManager->loginUser($drupal_user, 'social_auth_example')) {
-					return $this->redirect('user.page');
-				}
-			}
-
-			// If email was not registered, a new user account is created.
-			// Third argument is optional and allows other modules to implement
-			// alternative behaviors when a new user was created in using
-			// social_auth_example.
-			$drupal_user = $this->userManager->createUser($user->getName(), $user->getEmail(), 'social_auth_example');
-			// If the new user could be registered.
-			if ($drupal_user) {
-        // Download and set profile picture for the newly created user.
-        $this->userManager->setProfilePic($drupal_user, $user->getPicture(), $user->getId(), 'social_auth_example');
-
-				// If the new user could be logged in.
-				// Second argument is optional and allows other modules to implement
-				// alternative behaviors when user logs in using social_auth_example.
-				if ($this->userManager->loginUser($drupal_user, 'social_auth_example')) {
-					return $this->redirect('user.page');
-				}
-			}
+      // Uses authenticateUser method to create and/or login an user.
+			$this->userManager->authenticateUser($user->getEmail(), $user->getName(), $user->getId(), $user->getPicture());
 		}
 
 		drupal_set_message($this->t('You could not be authenticated, please contact the administrator'), 'error');
