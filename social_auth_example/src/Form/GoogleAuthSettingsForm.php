@@ -2,19 +2,19 @@
 
 namespace Drupal\social_auth_example\Form;
 
-use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\social_auth\Form\SocialAuthSettingsForm;
 
 /**
- * Settings form for Social Auth Google.
+ * Settings form for Social Auth Example.
  */
-class GoogleAuthSettingsForm extends ConfigFormBase {
+class GoogleAuthSettingsForm extends SocialAuthSettingsForm {
 
   /**
    * {@inheritdoc}
    */
   protected function getEditableConfigNames() {
-    return array('social_auth_example.settings');
+    return merge_array(array('social_auth_example.settings'), parent::getEditableConfigNames());
   }
 
   /**
