@@ -48,7 +48,7 @@ class TwitterUserEntityManager {
    */
   public function saveUser(array &$access_token) {
 
-    $entity = $this->entityManager->getStorage('social_post_twitter_user');
+    $entity = $this->entityManager->getStorage('social_post_example_user');
 
     // Checks if the user has already granted permissions.
     $user = $entity->loadByProperties([

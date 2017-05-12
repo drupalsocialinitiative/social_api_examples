@@ -61,8 +61,8 @@ class TwitterPostController extends ControllerBase {
   public static function create(ContainerInterface $container) {
     return new static(
       $container->get('plugin.network.manager'),
-      $container->get('social_post_example.auth_manager.auth_manager'),
-      $container->get('social_post_example_user_entity.manager.manager')
+      $container->get('example_post.auth_manager'),
+      $container->get('example_user_entity.manager')
     );
   }
 

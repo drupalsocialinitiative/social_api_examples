@@ -1,7 +1,7 @@
 services:
-  twitter_post.auth_manager:
-    class: '\Drupal\social_post_twitter\TwitterPostAuthManager'
+  example_post.auth_manager:
+    class: '\Drupal\social_post_example\TwitterPostAuthManager'
     arguments: ['@session','@request_stack']
-  twitter_user_entity.manager:
-    class: '\Drupal\social_post_twitter\TwitterUserEntityManager'
+  example_user_entity.manager:
+    class: '\Drupal\social_post_example\TwitterUserEntityManager'
     arguments: ['@entity_type.manager', '@current_user']

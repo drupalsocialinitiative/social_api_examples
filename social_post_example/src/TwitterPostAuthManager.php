@@ -57,7 +57,7 @@ class TwitterPostAuthManager {
    *   The oauth token.
    */
   public function setOauthToken($oauth_token) {
-    $this->session->set('social_post_twitter_oauth_token', $oauth_token);
+    $this->session->set('social_post_example_oauth_token', $oauth_token);
   }
 
   /**

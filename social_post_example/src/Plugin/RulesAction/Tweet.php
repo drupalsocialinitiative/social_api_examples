@@ -6,9 +6,7 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\rules\Core\RulesActionBase;
-use Drupal\social_post_example\Plugin\Network\TwitterPost;
 use Drupal\social_post_example\Plugin\Network\TwitterPostInterface;
-use Drupal\social_post_example\TwitterPostTokenManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -61,7 +59,7 @@ class Tweet extends RulesActionBase implements ContainerFactoryPluginInterface {
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
     /* @var \Drupal\social_post_example\Plugin\Network\TwitterPost $twitter_post*/
-    $twitter_post = $container->get('plugin.network.manager')->createInstance('social_post_twitter');
+    $twitter_post = $container->get('plugin.network.manager')->createInstance('social_post_example');
 
     return new static(
       $configuration,
@@ -99,7 +97,7 @@ class Tweet extends RulesActionBase implements ContainerFactoryPluginInterface {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
 
     $this->twitterPost = $twitter_post;
-    $this->twitterEntity = $entity_manager->getStorage('social_post_twitter_user');
+    $this->twitterEntity = $entity_manager->getStorage('social_post_example_user');
     $this->currentUser = $current_user;
   }
 
@@ -114,7 +112,10 @@ class Tweet extends RulesActionBase implements ContainerFactoryPluginInterface {
 
     /* @var \Drupal\social_post_example\Entity\TwitterUserInterface $account */
     foreach ($accounts as $account) {
-      $this->twitterPost->doPost($account->getAccessToken(), $account->getAccessTokenSecret(), $status);
+      // Update status, If there was an error, boolean FALSE is returned.
+      if (!$this->twitterPost->doPost($account->getAccessToken(), $account->getAccessTokenSecret(), $status)) {
+        drupal_set_message('There was an error while updating Twitter status for ' . $account->getScreenName() . ', please review the logs.', 'error');
+      }
     }
   }
 
