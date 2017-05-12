@@ -14,7 +14,7 @@ class GoogleAuthSettingsForm extends SocialAuthSettingsForm {
    * {@inheritdoc}
    */
   protected function getEditableConfigNames() {
-    return merge_array(array('social_auth_example.settings'), parent::getEditableConfigNames());
+    return array_merge(array('social_auth_example.settings'), parent::getEditableConfigNames());
   }
 
   /**
