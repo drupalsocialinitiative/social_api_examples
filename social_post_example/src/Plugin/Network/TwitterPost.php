@@ -35,7 +35,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *     field.
  *   - config_id: The configuration id. It usually is the same used by the
  *     configuration form.
- *     @see Drupal\social_post_example\Form\TwitterPostSettingsForm.
+ *
+ * @see Drupal\social_post_example\Form\TwitterPostSettingsForm
  *
  * @Network(
  *   id = "social_post_example",
@@ -121,7 +122,8 @@ class TwitterPost extends SocialPostNetwork implements TwitterPostInterface {
    *
    * The returning value of this method is what is returned when an instance of
    * this Network Plugin called the getSdk method.
-   * @see Drupal\social_post_example\Controller\TwitterPostController::redirectToTwitter.
+   *
+   * @see Drupal\social_post_example\Controller\TwitterPostController::redirectToTwitter
    */
   protected function initSdk() {
     $class_name = '\Abraham\TwitterOAuth\TwitterOAuth';

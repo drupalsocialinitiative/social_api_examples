@@ -12,7 +12,7 @@ interface TwitterPostInterface extends SocialPostNetworkInterface {
   /**
    * Gets the absolute url of the callback.
    *
-   * @return string.
+   * @return string
    *   The callback url.
    */
   public function getOauthCallback();

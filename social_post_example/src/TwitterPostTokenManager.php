@@ -100,7 +100,7 @@ class TwitterPostTokenManager {
    *
    * @TODO This will be deleted when tokens are supported by rules.
    *
-   * @see https://www.drupal.org/node/2632564.
+   * @see https://www.drupal.org/node/2632564
    */
   protected function getDataArray($text) {
     $data = [];
@@ -113,10 +113,12 @@ class TwitterPostTokenManager {
           $node = $this->routeMatch->getParameter('node');
           if ($node) {
             $data['node'] = $node;
-          } else { // This approach is used when a new node is created.
+          }
+          // This approach is used when a new node is created.
+          else {
             $nid = $this->entityQuery->getAggregate('node', 'AND')
-                            ->aggregate('nid', 'MAX')
-                            ->execute()[0]['nid_max'];
+              ->aggregate('nid', 'MAX')
+              ->execute()[0]['nid_max'];
 
             $data['node'] = $this->entityManager->getStorage('node')->load($nid);
           }

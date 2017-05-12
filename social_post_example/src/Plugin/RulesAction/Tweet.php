@@ -38,7 +38,7 @@ class Tweet extends RulesActionBase implements ContainerFactoryPluginInterface {
   /**
    * The social post twitter entity storage.
    *
-   * @var \Drupal\Core\Entity\EntityStorageInterface;
+   * @var \Drupal\Core\Entity\EntityStorageInterface
    */
   protected $twitterEntity;
 

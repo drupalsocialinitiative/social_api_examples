@@ -31,7 +31,7 @@ function social_post_twitter_form_user_form_alter(&$form, FormStateInterface $fo
  * @param \Drupal\Core\Session\AccountInterface $current_user
  *   The current user.
  *
- * @return bool The user can or cannot allow tweeting on his behalf.
+ * @return bool
  *   The user can or cannot allow tweeting on his behalf.
  */
 function _social_post_twitter_can_grant_permission(AccountInterface $current_user) {
@@ -53,7 +53,7 @@ function _social_post_twitter_can_grant_permission(AccountInterface $current_use
  * @param \Drupal\Core\Session\AccountInterface $current_user
  *   The current user.
  *
- * @return array The elements to add to the user edit form.
+ * @return array
  *   The elements to add to the user edit form.
  */
 function _social_post_twitter_user_edit_form(AccountInterface $current_user) {

@@ -2,10 +2,8 @@
 
 namespace Drupal\social_post_example\Controller;
 
-use Abraham\TwitterOAuth\TwitterOAuth;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\social_api\Plugin\NetworkManager;
-use Drupal\social_post_example\Plugin\Network\TwitterPost;
 use Drupal\social_post_example\TwitterPostAuthManager;
 use Drupal\social_post_example\TwitterUserEntityManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -63,8 +61,8 @@ class TwitterPostController extends ControllerBase {
   public static function create(ContainerInterface $container) {
     return new static(
       $container->get('plugin.network.manager'),
-      $container->get('twitter_post.auth_manager'),
-      $container->get('twitter_user_entity.manager')
+      $container->get('social_post_example.auth_manager.auth_manager'),
+      $container->get('social_post_example_user_entity.manager.manager')
     );
   }
 
@@ -75,8 +73,9 @@ class TwitterPostController extends ControllerBase {
    * authentication page. This method is not a mandatory one, instead you must
    * adapt to the requirements of the module you are implementing.
    *
-   * This method is called in 'social_post_example.redirect_to_twitter' route.
-   * @see social_post_example.routing.yml.
+   * This method is called in 'social_post_example.redirect_to_twitter' route
+   *
+   * @see social_post_example.routing.yml
    *
    * This method is triggered when the user loads user/social-post/example/auth.
    * It creates an instance of the Network Plugin 'social_post_example' and
@@ -92,7 +91,7 @@ class TwitterPostController extends ControllerBase {
    * @throws \Abraham\TwitterOAuth\TwitterOAuthException
    */
   public function redirectToTwitter() {
-    /* @var TwitterPost $network_plugin */
+    /* @var \Drupal\social_post_example\Plugin\Network\TwitterPost $network_plugin */
     // Creates an instance of the social_post_example Network Plugin.
     $network_plugin = $this->networkManager->createInstance('social_post_example');
 
@@ -129,7 +128,8 @@ class TwitterPostController extends ControllerBase {
    * module you are implementing.
    *
    * This method is called in 'social_post_example.callback' route.
-   * @see social_post_example.routing.yml.
+   *
+   * @see social_post_example.routing.yml
    *
    * This method is triggered when the path
    * user/social-post/example/auth/callback is loaded. It creates an instance of
