@@ -69,7 +69,7 @@ class TwitterUserEntityDeleteForm extends ContentEntityDeleteForm {
     // If a user id is passed as a parameter,
     // the form is being invoked from a user edit form.
     if ($uid) {
-      return Url::fromRoute('entity.user.edit_form', array('user' => $uid));
+      return Url::fromRoute('entity.user.edit_form', ['user' => $uid]);
     }
 
     return Url::fromRoute('entity.social_post_example_user.collection');

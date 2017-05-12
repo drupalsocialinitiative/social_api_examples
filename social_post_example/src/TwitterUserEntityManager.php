@@ -57,13 +57,13 @@ class TwitterUserEntityManager {
     ]);
 
     if (!count($user) > 0) {
-      $twitter_user = array(
+      $twitter_user = [
         'twitter_id' => $access_token['user_id'],
         'screen_name' => $access_token['screen_name'],
         'token' => $access_token['oauth_token'],
         'token_secret' => $access_token['oauth_token_secret'],
         'uid' => (int) $this->currentUser->id(),
-      );
+      ];
 
       $entity->create($twitter_user)->save();
 

@@ -30,27 +30,27 @@ class TwitterPostSettingsForm extends ConfigFormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
     $config = $this->config('social_post_example.settings');
 
-    $form['twitter_settings'] = array(
+    $form['twitter_settings'] = [
       '#type' => 'details',
       '#title' => $this->t('Twitter settings'),
       '#open' => TRUE,
-    );
+    ];
 
-    $form['twitter_settings']['consumer_key'] = array(
+    $form['twitter_settings']['consumer_key'] = [
       '#type' => 'textfield',
       '#required' => TRUE,
       '#title' => $this->t('Consumer Key (API Key)'),
       '#default_value' => $config->get('consumer_key'),
       '#description' => $this->t('Copy the Consumer Key here'),
-    );
+    ];
 
-    $form['twitter_settings']['consumer_secret'] = array(
+    $form['twitter_settings']['consumer_secret'] = [
       '#type' => 'textfield',
       '#required' => TRUE,
       '#title' => $this->t('Consumer Secret (API Secret)'),
       '#default_value' => $config->get('consumer_secret'),
       '#description' => $this->t('Copy the Consumer Secret here'),
-    );
+    ];
 
     return parent::buildForm($form, $form_state);
   }

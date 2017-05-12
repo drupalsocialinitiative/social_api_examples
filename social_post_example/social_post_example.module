@@ -59,42 +59,42 @@ function _social_post_twitter_can_grant_permission(AccountInterface $current_use
 function _social_post_twitter_user_edit_form(AccountInterface $current_user) {
   $accounts = _social_post_twitter_get_accounts_by_uid($current_user->id());
 
-  $form['social_post_twitter'] = array(
+  $form['social_post_twitter'] = [
     '#type' => 'details',
     '#title' => t('Social Post Twitter'),
     '#open' => TRUE,
-  );
-  $form['social_post_twitter']['accounts'] = array(
+  ];
+  $form['social_post_twitter']['accounts'] = [
     '#type' => 'table',
-    '#header' => array(t('Screen name'), t('Operations')),
+    '#header' => [t('Screen name'), t('Operations')],
     '#empty' => t('You have not added any account yet'),
-  );
+  ];
 
   /* @var \Drupal\social_post_example\Entity\TwitterUser $account */
   foreach ($accounts as $id => $account) {
-    $form['social_post_twitter']['accounts'][$id]['screen_name'] = array(
+    $form['social_post_twitter']['accounts'][$id]['screen_name'] = [
       '#type' => 'link',
       '#title' => '@' . $account->getScreenName(),
       '#url' => Url::fromUri('https://twitter.com/' . $account->getScreenName()),
-    );
-    $form['social_post_twitter']['accounts'][$id]['operations'] = array(
+    ];
+    $form['social_post_twitter']['accounts'][$id]['operations'] = [
       '#type' => 'operations',
-      '#links' => array(),
-    );
-    $form['social_post_twitter']['accounts'][$id]['operations']['#links']['delete'] = array(
+      '#links' => [],
+    ];
+    $form['social_post_twitter']['accounts'][$id]['operations']['#links']['delete'] = [
       'title' => t('Delete'),
-      'url' => Url::fromRoute('entity.social_post_twitter_user.delete_form', array('social_post_twitter_user' => $id, 'userd' => TRUE)),
-    );
+      'url' => Url::fromRoute('entity.social_post_twitter_user.delete_form', ['social_post_twitter_user' => $id, 'userd' => TRUE]),
+    ];
   }
 
-  $form['social_post_twitter']['button'] = array(
+  $form['social_post_twitter']['button'] = [
     '#type' => 'link',
     '#title' => t("Add account"),
-    '#attributes' => array(
-      'class' => array('button'),
-    ),
+    '#attributes' => [
+      'class' => ['button'],
+    ],
     '#url' => Url::fromRoute('social_post_twitter.redirect_to_twitter'),
-  );
+  ];
 
   return $form;
 }

@@ -95,7 +95,7 @@ class TwitterPostController extends ControllerBase {
     // Creates an instance of the social_post_example Network Plugin.
     $network_plugin = $this->networkManager->createInstance('social_post_example');
 
-    /* @var TwitterOAuth $connection */
+    /* @var \Abraham\TwitterOAuth\TwitterOAuth $connection */
     /* Gets the Twitter SDK.
      *
      * Notice that getSdk() does not require any argument, whereas getSdk2()
@@ -107,14 +107,14 @@ class TwitterPostController extends ControllerBase {
     $connection = $network_plugin->getSdk();
 
     // Requests Twitter to get temporary tokens.
-    $request_token = $connection->oauth('oauth/request_token', array('oauth_callback' => $network_plugin->getOauthCallback()));
+    $request_token = $connection->oauth('oauth/request_token', ['oauth_callback' => $network_plugin->getOauthCallback()]);
 
     // Saves the temporary token values in session.
     $this->authManager->setOauthToken($request_token['oauth_token']);
     $this->authManager->setOauthTokenSecret($request_token['oauth_token_secret']);
 
     // Generates url for user authentication.
-    $url = $connection->url('oauth/authorize', array('oauth_token' => $request_token['oauth_token']));
+    $url = $connection->url('oauth/authorize', ['oauth_token' => $request_token['oauth_token']]);
 
     // Redirects the user to allow him to grant permissions.
     return new RedirectResponse($url);
@@ -145,7 +145,7 @@ class TwitterPostController extends ControllerBase {
     $oauth_token = $this->authManager->getOauthToken();
     $oauth_token_secret = $this->authManager->getOauthTokenSecret();
 
-    /* @var TwitterOAuth $connection */
+    /* @var \Abraham\TwitterOAuth\TwitterOAuth $connection */
     /* Creates an instance of the Network Plugin and gets the SDK.
      *
      * Notice that this is the getSdk2() method. This is different from getSdk()
@@ -158,13 +158,13 @@ class TwitterPostController extends ControllerBase {
     $connection = $this->networkManager->createInstance('social_post_example')->getSdk2($oauth_token, $oauth_token_secret);
 
     // Gets the permanent access token.
-    $access_token = $connection->oauth('oauth/access_token', array('oauth_verifier' => $this->authManager->getOauthVerifier()));
+    $access_token = $connection->oauth('oauth/access_token', ['oauth_verifier' => $this->authManager->getOauthVerifier()]);
 
     // Save the user permanent tokens to use them when necessary.
     $uid = $this->twitterEntity->saveUser($access_token);
 
     // Returns to the user edit form.
-    return $this->redirect('entity.user.edit_form', array('user' => $uid));
+    return $this->redirect('entity.user.edit_form', ['user' => $uid]);
   }
 
 }

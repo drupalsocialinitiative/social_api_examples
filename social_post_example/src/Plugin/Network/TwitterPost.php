@@ -173,7 +173,7 @@ class TwitterPost extends SocialPostNetwork implements TwitterPostInterface {
    * {@inheritdoc}
    */
   public function getOauthCallback() {
-    return $this->urlGenerator->generateFromRoute('social_post_twitter.callback', array(), array('absolute' => TRUE));
+    return $this->urlGenerator->generateFromRoute('social_post_twitter.callback', [], ['absolute' => TRUE]);
   }
 
   /**
