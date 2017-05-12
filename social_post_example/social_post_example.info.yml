@@ -3,5 +3,6 @@ type: module
 description: Social Post example - Integration for Twitter
 core: 8.x
 package: Social
+configure: social_post_example.settings_form
 dependencies:
   - social_post
