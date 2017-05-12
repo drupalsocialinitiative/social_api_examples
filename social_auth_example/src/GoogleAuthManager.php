@@ -64,7 +64,7 @@ class GoogleAuthManager {
   /**
    * Gets the client object.
    *
-   * @return \Google_Client.
+   * @return \Google_Client
    *   The Google Client object.
    */
   public function getClient() {
@@ -92,7 +92,7 @@ class GoogleAuthManager {
   /**
    * Returns the user information.
    *
-   * @return \Google_Service_Oauth2_Userinfoplus.
+   * @return \Google_Service_Oauth2_Userinfoplus
    *   Google_Service_Userinfoplus object.
    */
   public function getUserInfo() {

@@ -34,7 +34,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *     field.
  *   - config_id: The configuration id. It usually is the same used by the
  *     configuration form.
- *     @see Drupal\social_auth_example\Form\GoogleAuthSettingsForm.
+ *
+ * @see Drupal\social_auth_example\Form\GoogleAuthSettingsForm
  *
  * @Network(
  *   id = "social_auth_example",
@@ -99,6 +100,7 @@ class GoogleAuth extends SocialAuthNetwork {
    *
    * The returning value of this method is what is returned when an instance of
    * this Network Plugin called the getSdk method.
+   *
    * @see Drupal\social_auth_example\Controller\GoogleAuthController::callback
    */
   public function initSdk() {

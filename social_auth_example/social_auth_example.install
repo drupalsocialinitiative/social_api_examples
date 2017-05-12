@@ -34,7 +34,7 @@ function social_auth_example_requirements($phase) {
 /**
  * Implements hook_install().
  *
- * setLoginButtonSettings() method sets up the settings for the login button.
+ * Method setLoginButtonSettings() sets up the settings for the login button.
  *
  * This button is used for the 'Social Auth Login Block' to add a link to
  * allow users login with the implementing service.
@@ -51,7 +51,7 @@ function social_auth_example_install() {
 /**
  * Implements hook_uninstall().
  *
- * deleteLoginButtonSettings() method deletes the settings for the login button.
+ * Method deleteLoginButtonSettings() deletes the settings for the login button.
  *
  * When the module is uninstall, you need to remove the login button for the
  * implementer from the 'Social Auth Login Block'.
