@@ -5,6 +5,3 @@ services:
   twitter_user_entity.manager:
     class: '\Drupal\social_post_twitter\TwitterUserEntityManager'
     arguments: ['@entity_type.manager', '@current_user']
-  twitter_post.token_manager:
-    class: 'Drupal\social_post_twitter\TwitterPostTokenManager'
-    arguments: ['@token','@entity_type.manager', '@current_route_match', '@current_user', '@entity.query']
