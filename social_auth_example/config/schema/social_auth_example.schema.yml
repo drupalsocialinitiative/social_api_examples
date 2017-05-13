@@ -1,0 +1,10 @@
+social_auth_google.settings:
+  type: config_object
+  label: 'Social Auth Google settings'
+  mapping:
+    client_id:
+      type: string
+      label: 'Client ID'
+    client_secret:
+      type: string
+      label: 'Client Secret'
