@@ -2,40 +2,40 @@
 
 namespace Drupal\social_auth_example;
 
+use Drupal\social_auth\AuthManager\OAuth2Manager;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Google_Service_Oauth2;
 
 /**
  * Manages the authentication requests.
+ *
+ * This class is specific to Google authentication, although it is extended
+ * from OAuth2Manager class.
+ *
+ * @see \Drupal\social_auth\AuthManager\OAuth2Manager
  */
-class GoogleAuthManager {
+class GoogleAuthManager extends OAuth2Manager {
 
   /**
    * The request object.
    *
    * @var \Symfony\Component\HttpFoundation\Request
    */
-  private $request;
+  protected $request;
 
   /**
-   * The Google client.
+   * The Google service client.
    *
    * @var \Google_Client
    */
-  private $client;
+  protected $client;
 
   /**
    * Code returned by Google for authentication.
    *
    * @var string
    */
-  private $code;
-
-  /**
-   * The Google Oauth2 object.
-   *
-   * @var \Google_Service_Oauth2
-   */
-  private $googleService;
+  protected $code;
 
   /**
    * GoogleLoginManager constructor.
@@ -48,55 +48,39 @@ class GoogleAuthManager {
   }
 
   /**
-   * Sets the client object.
-   *
-   * @param \Google_Client $client
-   *   Google Client object.
-   *
-   * @return $this
-   *   The current object.
-   */
-  public function setClient(\Google_Client $client) {
-    $this->client = $client;
-    return $this;
-  }
-
-  /**
-   * Gets the client object.
-   *
-   * @return \Google_Client
-   *   The Google Client object.
-   */
-  public function getClient() {
-    return $this->client;
-  }
-
-  /**
-   * Authenticates the users by using the returned code.
-   *
-   * @return $this
-   *   The current object.
+   * {@inheritdoc}
    */
   public function authenticate() {
-    $this->client->authenticate($this->getCode());
+    $this->client->setAccessToken($this->getAccessToken());
     return $this;
   }
 
   /**
-   * Creates Google Oauth2 Service.
+   * {@inheritdoc}
    */
-  public function createService() {
-    $this->googleService = new \Google_Service_Oauth2($this->getClient());
+  public function getAccessToken() {
+    if (!$this->accessToken) {
+      $this->accessToken = $this->client->fetchAccessTokenWithAuthCode($this->getCode());
+    }
+
+    return $this->accessToken;
   }
 
   /**
-   * Returns the user information.
-   *
-   * @return \Google_Service_Oauth2_Userinfoplus
-   *   Google_Service_Userinfoplus object.
+   * {@inheritdoc}
    */
   public function getUserInfo() {
-    return $this->googleService->userinfo->get();
+    return $this->getOauth2Service()->userinfo->get();
+  }
+
+  /**
+   * Gets Google Oauth2 Service.
+   *
+   * @return Google_Service_Oauth2
+   *   The Google Oauth2 service.
+   */
+  protected function getOauth2Service() {
+    return new Google_Service_Oauth2($this->getClient());
   }
 
   /**

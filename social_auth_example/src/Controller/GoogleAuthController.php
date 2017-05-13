@@ -7,6 +7,7 @@ use Drupal\social_auth_example\GoogleAuthManager;
 use Drupal\social_api\Plugin\NetworkManager;
 use Drupal\social_auth\SocialAuthUserManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Zend\Diactoros\Response\RedirectResponse;
 
 /**
@@ -40,19 +41,35 @@ class GoogleAuthController extends ControllerBase {
   private $userManager;
 
   /**
+   * The session manager.
+   *
+   * @var \Symfony\Component\HttpFoundation\Session\SessionInterface
+   */
+  protected $session;
+
+  /**
    * GoogleLoginController constructor.
    *
    * @param \Drupal\social_api\Plugin\NetworkManager $network_manager
    *   Used to get an instance of social_auth_google network plugin.
-   * @param \Drupal\social_auth_example\GoogleAuthManager $google_manager
-   *   Used to manage authentication methods.
    * @param \Drupal\social_auth\SocialAuthUserManager $user_manager
    *   Manages user login/registration.
+   * @param \Drupal\social_auth_example\GoogleAuthManager $google_manager
+   *   Used to manage authentication methods.
+   * @param \Symfony\Component\HttpFoundation\Session\SessionInterface $session
+   *   Used to store the access token into a session variable.
    */
-  public function __construct(NetworkManager $network_manager, GoogleAuthManager $google_manager, SocialAuthUserManager $user_manager) {
+  public function __construct(NetworkManager $network_manager, SocialAuthUserManager $user_manager, GoogleAuthManager $google_manager, SessionInterface $session) {
     $this->networkManager = $network_manager;
     $this->googleManager = $google_manager;
     $this->userManager = $user_manager;
+    $this->session = $session;
+
+    // Sets the plugin id.
+    $this->userManager->setPluginId('social_auth_example');
+
+    // Sets the session keys to nullify if user could not logged in.
+    $this->userManager->setSessionKeysToNullify(['social_auth_example_access_token']);
   }
 
   /**
@@ -61,8 +78,9 @@ class GoogleAuthController extends ControllerBase {
   public static function create(ContainerInterface $container) {
     return new static(
         $container->get('plugin.network.manager'),
+        $container->get('social_auth.user_manager'),
         $container->get('example_auth.manager'),
-        $container->get('social_auth.user_manager')
+        $container->get('session')
     );
   }
 
@@ -118,29 +136,24 @@ class GoogleAuthController extends ControllerBase {
    *
    * It later authenticates the user and creates the service to obtain data
    * about the user.
-   *
-   * After the user is authenticated, it checks if a user with the same email
-   * has already registered. If so, it logins that user; if not, it creates
-   * a new user with the information provided by the social network and logins
-   * the new user.
    */
   public function callback() {
     /* @var \Google_Client $client */
     // Creates the Network Plugin instance and get the SDK.
     $client = $this->networkManager->createInstance('social_auth_example')->getSdk();
 
-    // Authenticates the user and obtains his data.
-    $this->googleManager->setClient($client)
-      ->authenticate()
-      ->createService();
+    // Authenticates the user.
+    $this->googleManager->setClient($client)->authenticate();
+
+    // Saves access token so that event subscribers can call Google API.
+    $this->session->set('social_auth_example_access_token', $this->googleManager->getAccessToken());
 
     // Gets user information.
     $user = $this->googleManager->getUserInfo();
-
     // If user information could be retrieved.
     if ($user) {
-      // Uses authenticateUser method to create and/or login an user.
-      $this->userManager->authenticateUser($user->getEmail(), $user->getName(), $user->getId(), $user->getPicture());
+      // Returns the redirect value obtained from authenticateUser.
+      return $this->userManager->authenticateUser($user->getEmail(), $user->getName(), $user->getId(), $user->getPicture());
     }
 
     drupal_set_message($this->t('You could not be authenticated, please contact the administrator'), 'error');
