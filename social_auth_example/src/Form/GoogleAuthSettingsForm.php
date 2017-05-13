@@ -14,7 +14,7 @@ class GoogleAuthSettingsForm extends SocialAuthSettingsForm {
    * {@inheritdoc}
    */
   protected function getEditableConfigNames() {
-    return array_merge(array('social_auth_example.settings'), parent::getEditableConfigNames());
+    return array_merge(['social_auth_example.settings'], parent::getEditableConfigNames());
   }
 
   /**
@@ -30,27 +30,27 @@ class GoogleAuthSettingsForm extends SocialAuthSettingsForm {
   public function buildForm(array $form, FormStateInterface $form_state) {
     $config = $this->config('social_auth_example.settings');
 
-    $form['google_settings'] = array(
+    $form['google_settings'] = [
       '#type' => 'details',
       '#title' => $this->t('Google Client settings'),
       '#open' => TRUE,
-    );
+    ];
 
-    $form['google_settings']['client_id'] = array(
+    $form['google_settings']['client_id'] = [
       '#type' => 'textfield',
       '#required' => TRUE,
       '#title' => $this->t('Client ID'),
       '#default_value' => $config->get('client_id'),
       '#description' => $this->t('Copy the Client ID here'),
-    );
+    ];
 
-    $form['google_settings']['client_secret'] = array(
+    $form['google_settings']['client_secret'] = [
       '#type' => 'textfield',
       '#required' => TRUE,
       '#title' => $this->t('Client Secret'),
       '#default_value' => $config->get('client_secret'),
       '#description' => $this->t('Copy the Client Secret here'),
-    );
+    ];
 
     return parent::buildForm($form, $form_state);
   }

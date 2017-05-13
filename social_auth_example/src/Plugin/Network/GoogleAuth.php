@@ -118,7 +118,7 @@ class GoogleAuth extends SocialAuthNetwork {
     $settings = $this->settings;
 
     // Gets the absolute url of the callback.
-    $redirect_uri = $this->urlGenerator->generateFromRoute('social_auth_example.callback', array(), array('absolute' => TRUE));
+    $redirect_uri = $this->urlGenerator->generateFromRoute('social_auth_example.callback', [], ['absolute' => TRUE]);
 
     // Creates a and sets data to Google_Client object.
     $client = new \Google_Client();

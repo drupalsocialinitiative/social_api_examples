@@ -114,7 +114,7 @@ class GoogleAuthController extends ControllerBase {
     // Creates an instance of the Network Plugin and gets the SDK.
     $client = $this->networkManager->createInstance('social_auth_example')->getSdk();
     // Sets the scopes (permissions to ask for).
-    $client->setScopes(array('email', 'profile'));
+    $client->setScopes(['email', 'profile']);
 
     // Redirects to Google Accounts to allow the user grant the permissions.
     return new RedirectResponse($client->createAuthUrl());
