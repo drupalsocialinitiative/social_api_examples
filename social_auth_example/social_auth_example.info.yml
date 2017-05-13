@@ -3,5 +3,6 @@ description: Social Auth example - Integration for Google
 core: 8.x
 type: module
 package: Social
+configure: social_auth_example.settings_form
 dependencies:
   - social_auth

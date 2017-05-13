@@ -129,7 +129,7 @@ class GoogleAuthController extends ControllerBase {
     // Creates the Network Plugin instance and get the SDK.
     $client = $this->networkManager->createInstance('social_auth_example')->getSdk();
 
-    // Authenticate the user and obtains his data.
+    // Authenticates the user and obtains his data.
     $this->googleManager->setClient($client)
       ->authenticate()
       ->createService();
