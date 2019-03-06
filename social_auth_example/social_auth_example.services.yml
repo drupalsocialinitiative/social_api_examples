@@ -1,5 +1,6 @@
 services:
-  example_auth.manager:
-    class: Drupal\social_auth_example\GoogleAuthManager
+  social_auth_example.manager:
+    class: Drupal\social_auth_example\ExampleAuthManager
     arguments:
-      - '@request_stack'
+      - '@config.factory'
+      - '@logger.factory'

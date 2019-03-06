@@ -5,7 +5,7 @@ namespace Drupal\social_auth_example\Settings;
 /**
  * Defines an interface for Social Auth Google settings.
  */
-interface GoogleAuthSettingsInterface {
+interface ExampleAuthSettingsInterface {
 
   /**
    * Gets the client ID.

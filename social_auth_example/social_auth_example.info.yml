@@ -5,4 +5,4 @@ type: module
 package: Social
 configure: social_auth_example.settings_form
 dependencies:
-  - social_auth
+  - social_auth:social_auth

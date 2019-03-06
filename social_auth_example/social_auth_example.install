@@ -23,7 +23,7 @@ function social_auth_example_requirements($phase) {
   // When the site builder wants to enable this module.
   if ($phase == 'install') {
     // We check that the required library was downloaded beforehand.
-    $requirements = SocialApiImplementerInstaller::checkLibrary('social_auth_example', 'Social Auth Example', 'google/apiclient', 2.0, 3.0);
+    $requirements = SocialApiImplementerInstaller::checkLibrary('social_auth_example', 'Social Auth Example', 'league/oauth2-google', 2.0, 3.0);
   }
 
   return $requirements;
@@ -43,7 +43,7 @@ function social_auth_example_requirements($phase) {
  * will be used as a link in the 'Social Auth Login Block'.
  */
 function social_auth_example_install() {
-  SocialAuthController::setLoginButtonSettings('social_auth_example', 'social_auth_example.redirect_to_google', 'img/google_logo.svg');
+  SocialAuthController::setLoginButtonSettings('social_auth_example', 'social_auth_example.redirect_to_provider', 'img/google_logo.svg');
 }
 
 /**

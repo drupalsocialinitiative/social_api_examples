@@ -2,7 +2,7 @@
 
 namespace Drupal\social_auth_example\Settings;
 
-use Drupal\social_api\Settings\SettingsBase;
+use Drupal\social_auth\Settings\SettingsBase;
 
 /**
  * Returns the client information.
@@ -11,12 +11,12 @@ use Drupal\social_api\Settings\SettingsBase;
  * definition. The immutable configuration used by this class is also declared
  * in the definition.
  *
- * @see \Drupal\social_auth_example\Plugin\Network\GoogleAuth
+ * @see \Drupal\social_auth_example\Plugin\Network\ExampleAuth
  *
  * This should return the values required to request the social network. In this
  * case, Google requires a Client ID and a Client Secret.
  */
-class GoogleAuthSettings extends SettingsBase implements GoogleAuthSettingsInterface {
+class ExampleAuthSettings extends SettingsBase implements ExampleAuthSettingsInterface {
 
   /**
    * Client ID.

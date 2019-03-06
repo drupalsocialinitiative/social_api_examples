@@ -1,17 +1,13 @@
 {
-    "name": "drupal/social_auth_google",
+    "name": "drupal/social_auth_example",
     "type": "drupal-module",
-    "description": "Social Auth integration for Google",
+    "description": "An example module for Social Auth",
     "keywords": ["Drupal"],
-    "license": "GPL-2.0+",
-    "homepage": "https://www.drupal.org/project/social_auth_google",
+    "license": "GPL-2.0-or-later",
     "minimum-stability": "dev",
-    "support": {
-        "issues": "https://www.drupal.org/project/issues/social_auth_google",
-        "source": "http://cgit.drupalcode.org/social_auth_google"
-    },
     "require": {
-        "google/apiclient": "~2.0"
+        "league/oauth2-google": "^3.0",
+        "drupal/social_auth": "^2.0"
     },
     "authors": [
         {

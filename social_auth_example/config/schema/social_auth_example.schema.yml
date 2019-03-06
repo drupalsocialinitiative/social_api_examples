@@ -8,3 +8,9 @@ social_auth_google.settings:
     client_secret:
       type: string
       label: 'Client Secret'
+    scopes:
+      type: string
+      label: 'Scopes to be requested'
+    endpoints:
+      type: string
+      label: 'API endpoints to be requested'
