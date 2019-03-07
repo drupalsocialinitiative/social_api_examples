@@ -1,4 +1,4 @@
-social_auth_google.settings:
+social_auth_example.settings:
   type: config_object
   label: 'Social Auth Google settings'
   mapping:
