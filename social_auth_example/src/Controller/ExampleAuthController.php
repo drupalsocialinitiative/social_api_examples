@@ -3,6 +3,7 @@
 namespace Drupal\social_auth_example\Controller;
 
 use Drupal\Core\Messenger\MessengerInterface;
+use Drupal\Core\Render\RendererInterface;
 use Drupal\social_api\Plugin\NetworkManager;
 use Drupal\social_auth\Controller\OAuth2ControllerBase;
 use Drupal\social_auth\SocialAuthDataHandler;
@@ -36,18 +37,21 @@ class ExampleAuthController extends OAuth2ControllerBase {
    *   Used to access GET parameters.
    * @param \Drupal\social_auth\SocialAuthDataHandler $data_handler
    *   The Social Auth data handler (used for session management).
+   * @param \Drupal\Core\Render\RendererInterface $renderer
+   *   Used to handle metadata for redirection to authentication URL.
    */
   public function __construct(MessengerInterface $messenger,
                               NetworkManager $network_manager,
                               UserAuthenticator $user_authenticator,
                               ExampleAuthManager $example_manager,
                               RequestStack $request,
-                              SocialAuthDataHandler $data_handler) {
+                              SocialAuthDataHandler $data_handler,
+                              RendererInterface $renderer) {
 
     parent::__construct(
       'Social Auth Example', 'social_auth_example',
       $messenger, $network_manager, $user_authenticator,
-      $example_manager, $request, $data_handler);
+      $example_manager, $request, $data_handler, $renderer);
   }
 
   /**
@@ -60,7 +64,8 @@ class ExampleAuthController extends OAuth2ControllerBase {
       $container->get('social_auth.user_authenticator'),
       $container->get('social_auth_example.manager'),
       $container->get('request_stack'),
-      $container->get('social_auth.data_handler')
+      $container->get('social_auth.data_handler'),
+      $container->get('renderer')
     );
   }
 
