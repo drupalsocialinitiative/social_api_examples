@@ -1,0 +1,7 @@
+name: Social Auth Event Subscriber
+description: Social Auth Event Subscriber Examples
+core: 8.x
+type: module
+package: Social
+dependencies:
+  - social_auth:social_auth

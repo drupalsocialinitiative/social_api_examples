@@ -1,0 +1,7 @@
+services:
+  my_module.event_subscriber:
+    class: Drupal\social_auth_subscriber\EventSubscriber\UserCreationAndLogin
+    arguments:
+      - '@messenger'
+    tags:
+      - { name: 'event_subscriber' }
