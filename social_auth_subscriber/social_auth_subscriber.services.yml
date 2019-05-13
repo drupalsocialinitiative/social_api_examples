@@ -1,7 +1,17 @@
 services:
-  my_module.event_subscriber:
+  social_auth_subscriber.user_creation_login:
     class: Drupal\social_auth_subscriber\EventSubscriber\UserCreationAndLogin
     arguments:
       - '@messenger'
+    tags:
+      - { name: 'event_subscriber' }
+
+  social_auth_subscriber.more_data:
+    class: Drupal\social_auth_subscriber\EventSubscriber\RequestMoreData
+    arguments:
+      - '@messenger'
+      - '@social_auth.data_handler'
+      - '@plugin.network.manager'
+      - '@social_auth_google.manager' # Should use the appropriate provider auth manager.
     tags:
       - { name: 'event_subscriber' }

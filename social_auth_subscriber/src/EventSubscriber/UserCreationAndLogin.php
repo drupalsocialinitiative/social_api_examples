@@ -10,9 +10,6 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 /**
  * Example of how to subscribe to events when user is created or logged in.
  *
- * This example shows how to use the OAuth2 Manager provided by Social Auth
- * implementers to request more data.
- *
  * @package Drupal\social_auth_subscriber\EventSubscriber
  */
 class UserCreationAndLogin implements EventSubscriberInterface {
