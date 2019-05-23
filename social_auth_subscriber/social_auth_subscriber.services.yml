@@ -15,3 +15,11 @@ services:
       - '@social_auth_google.manager' # Should use the appropriate provider auth manager.
     tags:
       - { name: 'event_subscriber' }
+
+  social_auth_subscriber.failed_authentication:
+    class: Drupal\social_auth_subscriber\EventSubscriber\FailedAuthentication
+    arguments:
+      - '@request_stack'
+      - '@messenger'
+    tags:
+      - { name: 'event_subscriber' }

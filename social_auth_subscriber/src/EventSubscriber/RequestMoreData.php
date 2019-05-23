@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Drupal\social_auth_subscriber\EventSubscriber;
 
 use Drupal\Core\Messenger\MessengerInterface;
