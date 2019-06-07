@@ -4,8 +4,9 @@ namespace Drupal\social_auth_subscriber\EventSubscriber;
 
 use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\social_auth\Event\SocialAuthEvents;
-use Drupal\social_auth\Event\SocialAuthUserEvent;
+use Drupal\social_auth\Event\UserEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Drupal\social_auth\Event\UserFieldsEvent;
 
 /**
  * Example of how to subscribe to events when user is created or logged in.
@@ -41,6 +42,7 @@ class UserCreationAndLogin implements EventSubscriberInterface {
   public static function getSubscribedEvents() {
     $events[SocialAuthEvents::USER_CREATED] = ['onUserCreated'];
     $events[SocialAuthEvents::USER_LOGIN] = ['onUserLogin'];
+    $events[SocialAuthEvents::USER_FIELDS] = ['onUserFields'];
 
     return $events;
   }
@@ -48,12 +50,12 @@ class UserCreationAndLogin implements EventSubscriberInterface {
   /**
    * Alters the user name if the user is being created by Social Auth.
    *
-   * @param \Drupal\social_auth\Event\SocialAuthUserEvent $event
+   * @param \Drupal\social_auth\Event\UserEvent $event
    *   The Social Auth user event object.
    *
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
-  public function onUserCreated(SocialAuthUserEvent $event) {
+  public function onUserCreated(UserEvent $event) {
 
     /*
      * @var Drupal\user\UserInterface $user
@@ -70,11 +72,35 @@ class UserCreationAndLogin implements EventSubscriberInterface {
   /**
    * Sets a drupal message when a user logs in.
    *
-   * @param \Drupal\social_auth\Event\SocialAuthUserEvent $event
+   * @param \Drupal\social_auth\Event\UserEvent $event
    *   The Social Auth user event object.
    */
-  public function onUserLogin(SocialAuthUserEvent $event) {
+  public function onUserLogin(UserEvent $event) {
     $this->messenger->addStatus('User has logged in with a Social Auth implementer. Implementer for ' . $event->getPluginId());
+  }
+
+  /**
+   * Prints a drupal message with the current and updated user name.
+   *
+   * You can initialized custom user fields or change initialized values as
+   * needed.
+   *
+   * @param \Drupal\social_auth\Event\UserFieldsEvent $event
+   *   The Social Auth user event object.
+   */
+  public function onUserFields(UserFieldsEvent $event) {
+    $fields = $event->getUserFields();
+
+    $this->messenger->addStatus('Field mail has been initialized to ' . $fields['mail']);
+
+    $fields['mail'] = 'updated_' . $fields['mail'];
+
+    $this->messenger->addStatus('Field mail has been updated to ' . $fields['mail']);
+
+    // Assumming foo is an user field.
+    $fields['foo'] = 'bar';
+
+    $event->setUserFields($fields);
   }
 
 }

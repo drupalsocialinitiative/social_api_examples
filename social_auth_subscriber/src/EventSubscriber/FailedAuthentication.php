@@ -66,7 +66,7 @@ class FailedAuthentication implements EventSubscriberInterface {
    * Sets a redirect back session value.
    *
    * This is used in case there was a failed authentication. The user, in this
-   * case, will be redirected to the page from where he started the
+   * case, will be redirected to the page from where the user started the
    * authentication process.
    *
    * @param \Drupal\social_auth\Event\BeforeRedirectEvent $event

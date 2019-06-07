@@ -6,7 +6,7 @@ use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\social_api\Plugin\NetworkManager;
 use Drupal\social_auth\AuthManager\OAuth2ManagerInterface;
 use Drupal\social_auth\Event\SocialAuthEvents;
-use Drupal\social_auth\Event\SocialAuthUserEvent;
+use Drupal\social_auth\Event\UserEvent;
 use Drupal\social_auth\SocialAuthDataHandler;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -89,12 +89,12 @@ class RequestMoreData implements EventSubscriberInterface {
   /**
    * Sets a drupal message when a user logs in.
    *
-   * @param \Drupal\social_auth\Event\SocialAuthUserEvent $event
+   * @param \Drupal\social_auth\Event\UserEvent $event
    *   The Social Auth user event object.
    *
    * @throws \Drupal\Component\Plugin\Exception\PluginException
    */
-  public function onUserLogin(SocialAuthUserEvent $event) {
+  public function onUserLogin(UserEvent $event) {
     $this->messenger->addStatus('User has logged in with a Social Auth implementer. Implementer for ' . $event->getPluginId());
 
     // Sets prefix.
