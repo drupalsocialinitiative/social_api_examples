@@ -97,6 +97,11 @@ class UserCreationAndLogin implements EventSubscriberInterface {
 
     $this->messenger->addStatus('Field mail has been updated to ' . $fields['mail']);
 
+    // Assumming we want to store the user picture somewhere else other than
+    // 'user_picture'.
+    $fields['picture_id'] = $fields['user_picture'];
+    unset($fields['user_picture']);
+
     // Assumming foo is an user field.
     $fields['foo'] = 'bar';
 
