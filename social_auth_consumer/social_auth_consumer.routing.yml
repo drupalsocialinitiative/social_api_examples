@@ -1,0 +1,7 @@
+social_auth_consumer.consume:
+  path: 'social-auth-consumer/consume'
+  defaults:
+    _controller: '\Drupal\social_auth_consumer\Controller\SocialAuthConsumerController::consume'
+    _title: 'Social Auth Consumer'
+  requirements:
+    _permission: 'access content'
