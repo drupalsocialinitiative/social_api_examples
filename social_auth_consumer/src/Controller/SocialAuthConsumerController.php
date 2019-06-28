@@ -86,7 +86,7 @@ class SocialAuthConsumerController extends ControllerBase {
         'user_id' => $this->currentUser()->id(),
       ]);
 
-    return current($socialAuthUser)->get('token')->getValue()[0]['value'];
+    return current($socialAuthUser)->getToken();
   }
 
 }
