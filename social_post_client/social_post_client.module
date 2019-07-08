@@ -1,0 +1,48 @@
+<?php
+
+/**
+ * @file
+ * Tweets on node creation.
+ */
+
+use Drupal\node\Entity\Node;
+
+/**
+ * Implements hook_ENTITY_TYPE_insert().
+ */
+function social_post_client_node_insert(Node $node) {
+
+  // Gets instance of Social Post Twitter.
+  /** @var \Drupal\social_post_twitter\Plugin\Network\TwitterPostInterface $post */
+  $post = \Drupal::service('plugin.network.manager')->createInstance('social_post_twitter');
+
+  // Gets the Social Post manager.
+  /** @var \Drupal\social_post\SocialPostManager $post_manager */
+  $post_manager = \Drupal::service('social_post.post_manager');
+
+  $post_manager->setPluginId('social_post_twitter');
+
+  // Gets all the Twitter accounts associated to the current user.
+  $accounts = $post_manager->getAccountsByUserId('social_post_twitter', $post_manager->getCurrentUser());
+
+  $tweet = [
+    'status' => 'I just published ' . $node->getTitle(),
+  ];
+
+  /*
+   * Media files can be attached to the tweet.
+   * $img_paths = [
+   *   '/path/to/image.jpg',
+   * ];
+   *
+   * $tweet['media_paths'] => $img_paths;
+   */
+
+  /** @var \Drupal\social_post\Entity\SocialPost $account */
+  foreach ($accounts as $account) {
+    $access_token = json_decode($post_manager->getToken($account->getProviderUserId()), TRUE);
+
+    $post->doPost($access_token['oauth_token'], $access_token['oauth_token_secret'], $tweet);
+  }
+
+}
