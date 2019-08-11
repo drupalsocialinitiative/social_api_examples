@@ -12,18 +12,14 @@ use Drupal\node\Entity\Node;
  */
 function social_post_client_node_insert(Node $node) {
 
-  // Gets instance of Social Post Twitter.
-  /** @var \Drupal\social_post_twitter\Plugin\Network\TwitterPostInterface $post */
-  $post = \Drupal::service('plugin.network.manager')->createInstance('social_post_twitter');
+  // Gets the user manager to retrieve tokens for a user.
+  /** @var \Drupal\social_post\User\UserManager $user_manager */
+  $user_manager = \Drupal::service('social_post.user_manager');
 
-  // Gets the Social Post manager.
-  /** @var \Drupal\social_post\SocialPostManager $post_manager */
-  $post_manager = \Drupal::service('social_post.post_manager');
-
-  $post_manager->setPluginId('social_post_twitter');
+  $user_manager->setPluginId('social_post_twitter');
 
   // Gets all the Twitter accounts associated to the current user.
-  $accounts = $post_manager->getAccountsByUserId('social_post_twitter', $post_manager->getCurrentUser());
+  $accounts = $user_manager->getAccountsByUserId($user_manager->getCurrentUser());
 
   $tweet = [
     'status' => 'I just published ' . $node->getTitle(),
@@ -38,11 +34,21 @@ function social_post_client_node_insert(Node $node) {
    * $tweet['media_paths'] => $img_paths;
    */
 
+  // Gets instance of Social Post Twitter Network plugin.
+  /** @var \Drupal\social_post_twitter\Plugin\Network\TwitterPostInterface $plugin */
+  $client = \Drupal::service('plugin.network.manager')->createInstance('social_post_twitter')->getSdk();
+
+  // Gets the twitter post manager to tweet.
+  /** @var \Drupal\social_post_twitter\TwitterPostManager $post_manager */
+  $post_manager = \Drupal::service('twitter_post.manager');
+
   /** @var \Drupal\social_post\Entity\SocialPost $account */
   foreach ($accounts as $account) {
-    $access_token = json_decode($post_manager->getToken($account->getProviderUserId()), TRUE);
+    $access_token = json_decode($user_manager->getToken($account->getProviderUserId()), TRUE);
 
-    $post->doPost($access_token['oauth_token'], $access_token['oauth_token_secret'], $tweet);
+    $post_manager->setClient($client)
+      ->setOauthToken($access_token['oauth_token'], $access_token['oauth_token_secret'])
+      ->doPost($tweet);
   }
 
 }
