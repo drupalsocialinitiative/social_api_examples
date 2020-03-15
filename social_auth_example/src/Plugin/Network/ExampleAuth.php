@@ -67,7 +67,7 @@ class ExampleAuth extends NetworkBase {
       throw new SocialApiException(sprintf('The Google library for PHP League OAuth2 not found. Class: %s.', $class_name));
     }
 
-    /* @var \Drupal\social_auth_example\Settings\ExampleAuthSettings $settings */
+    /** @var \Drupal\social_auth_example\Settings\ExampleAuthSettings $settings */
     $settings = $this->settings;
 
     if ($this->validateConfig($settings)) {
@@ -76,6 +76,8 @@ class ExampleAuth extends NetworkBase {
         'clientId' => $settings->getClientId(),
         'clientSecret' => $settings->getClientSecret(),
         'redirectUri' => Url::fromRoute('social_auth_example.callback')->setAbsolute()->toString(),
+
+        // These two are specific to Google.
         'accessType' => 'offline',
         'verify' => FALSE,
       ];

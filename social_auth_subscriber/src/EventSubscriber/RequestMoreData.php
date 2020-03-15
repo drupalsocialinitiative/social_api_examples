@@ -102,7 +102,7 @@ class RequestMoreData implements EventSubscriberInterface {
 
     // Gets client object.
     $client = $this->networkManager->createInstance($event->getPluginId())->getSdk();
-
+    $token = $this->dataHandler->get('access_token');
     // Create provider OAuth2 manager.
     // Can also use $client directly and request data using the library/SDK.
     $this->providerAuth->setClient($client)
